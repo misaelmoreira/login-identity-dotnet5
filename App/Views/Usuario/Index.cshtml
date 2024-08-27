@@ -1,0 +1,68 @@
+@model IEnumerable<UsuarioModel>
+@{
+    ViewBag.Subtitulo = "Listagem de Usuários";
+    var administradores = ViewBag.Administradores as IEnumerable<string>;
+}
+
+<header class="d-flex justify-content-between align-items-center">
+    <div>
+        <h1 class="text-primary">@ViewBag.Subtitulo</h1>
+    </div>
+    <div>
+        <a asp-action="Cadastrar" class="btn btn-primary">Novo Usuário</a>
+    </div>
+</header>
+<hr>
+
+<partial name="_MensagemPartial" />
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-striped tabela-usuarios">
+        <thead>
+            <tr>
+                <th>CPF</th>
+                <th>Nome Completo</th>
+                <th>Idade</th>
+                <th>Usuário/E-mail</th>
+                <th>Telefone</th>
+                <th>Administrador</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usuario in Model)
+            {
+                <tr>
+                    <td>@usuario.CPF</td>
+                    <td>@usuario.NomeCompleto</td>
+                    <td>@usuario.Idade</td>
+                    <td>@usuario.Email</td>
+                    <td>@usuario.PhoneNumber</td>
+                    <td>@(administradores.Contains(usuario.UserName) ? "Sim" : "Não")</td>
+                    <td>
+                        <a asp-action="Cadastrar" asp-route-id="@usuario.Id" class="btn btn-sm btn-secondary"><i class="bi-pencil" title="Alterar"></i></a>
+                        @if (administradores.Contains(usuario.UserName))
+                        {
+                            <a asp-action="RemAdministrador" asp-route-id="@usuario.Id" class="btn btn-sm btn-danger">
+                                <i class="bi-person-x" title="Remover perfil administrador"></i>
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-action="AddAdministrador" asp-route-id="@usuario.Id" class="btn btn-sm btn-secondary">
+                                <i class="bi-person-plus" title="Adicionar perfil administrador"></i>
+                            </a>
+                        }
+                        <a asp-action="Excluir" asp-route-id="@usuario.Id" class="btn btn-sm btn-danger"><i class="bi-trash"
+                        title="Excluir"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Não há nenhum usuário cadastrado.</p>
+}

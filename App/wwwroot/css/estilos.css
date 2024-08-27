@@ -1,0 +1,24 @@
+.validation-summary ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tabela-usuarios tr > th:first-child,
+.tabela-usuarios tr > td:first-child,
+.tabela-usuarios tr > th:nth-child(3),
+.tabela-usuarios tr > td:nth-child(3),
+.tabela-usuarios tr > th:nth-child(4),
+.tabela-usuarios tr > td:nth-child(4),
+.tabela-usuarios tr > th:nth-child(5),
+.tabela-usuarios tr > td:nth-child(5),
+.tabela-usuarios tr > th:nth-child(6),
+.tabela-usuarios tr > td:nth-child(6),
+.tabela-usuarios tr > th:last-child,
+.tabela-usuarios tr > td:last-child
+
+{
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+}
